@@ -3,64 +3,63 @@ export default async function handler(req, res) {
   const query = (req.query.q || "").toLowerCase()
 
   if (!query) {
-    return res.status(400).json({error:"missing query"})
+    return res.status(400).json({ error: "missing query" })
   }
 
   try {
 
-    const page = await fetch(
-      "https://www.broshura.bg/search?q=" + encodeURIComponent(query),
-      {
-        headers:{
-          "User-Agent":"Mozilla/5.0"
-        }
+    const response = await fetch("https://www.broshura.bg/", {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
       }
-    )
+    })
 
-    const html = await page.text()
+    const html = await response.text()
 
-    const results = []
+    const products = []
 
-    const blocks = html.split("product-item")
+    const items = html.split("product")
 
-    blocks.forEach(block => {
+    items.forEach(item => {
 
-      const nameMatch = block.match(/title="([^"]+)"/)
-      const priceMatch = block.match(/(\d+[.,]\d+)\s?лв/)
+      const nameMatch = item.match(/title="([^"]+)"/)
+      const priceMatch = item.match(/(\d+[.,]\d+)/)
+      const storeMatch = item.match(/store[^>]*>([^<]+)/)
 
-      if(nameMatch && priceMatch){
+      if (nameMatch && priceMatch) {
 
-        const name = nameMatch[1]
-        const price = parseFloat(priceMatch[1].replace(",","."))
-        const storeMatch = block.match(/store-name[^>]*>([^<]+)/)
+        const name = nameMatch[1].toLowerCase()
 
-        const store = storeMatch ? storeMatch[1] : "магазин"
+        if (name.includes(query)) {
 
-        results.push({
-          store:store,
-          title:name,
-          price:price,
-          url:"https://www.broshura.bg/search?q="+encodeURIComponent(query)
-        })
+          const price = parseFloat(priceMatch[1].replace(",", "."))
 
+          const store = storeMatch ? storeMatch[1] : "магазин"
+
+          products.push({
+            store: store,
+            title: name,
+            price: price,
+            url: "https://www.broshura.bg/"
+          })
+
+        }
       }
 
     })
 
-    results.sort((a,b)=>a.price-b.price)
-
-    const top3 = results.slice(0,3)
+    products.sort((a, b) => a.price - b.price)
 
     res.status(200).json({
       query,
-      results:top3
+      results: products.slice(0, 3)
     })
 
-  } catch(e){
+  } catch (err) {
 
     res.status(500).json({
-      error:"scraping error",
-      details:e.toString()
+      error: "scraping failed",
+      details: err.toString()
     })
 
   }
