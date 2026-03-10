@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<title>Promo Hunter Sofia</title>
+<style>
+body{
+font-family:Arial;
+background:#f4f6f8;
+padding:40px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+margin-top:15px;
+padding:12px;
+width:100%;
+background:#111;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.result{
+margin-top:20px;
+padding:15px;
+background:#f1f1f1;
+border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Promo Hunter Sofia</h1>
+
+<p>Намери най-добрите оферти в София</p>
+
+<input id="product" placeholder="Например: кафе Lavazza">
+
+<button onclick="search()">Търси най-евтиното</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+function search(){
+
+let product=document.getElementById("product").value
+
+let text=`Провери в Broshura.bg и сайтовете на Lidl, Kaufland, Billa, Fantastico, Technopolis и Bauhaus.
+
+Намери най-евтината цена за: ${product} в София.
+
+Покажи магазин, цена и валидност.`
+
+document.getElementById("result").innerText=text
+
+}
+
+</script>
+
+</body>
+</html>
