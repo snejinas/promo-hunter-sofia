@@ -1,89 +1,358 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-<meta charset="UTF-8">
-<title>Promo Hunter Sofia</title>
-<style>
-body{
-font-family:Arial;
-background:#f4f6f8;
-padding:40px;
-}
-
-.container{
-max-width:700px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-
-h1{
-text-align:center;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:1px solid #ccc;
-}
-
-button{
-margin-top:15px;
-padding:12px;
-width:100%;
-background:#111;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-
-.result{
-margin-top:20px;
-padding:15px;
-background:#f1f1f1;
-border-radius:6px;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promo Hunter Sofia</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #111;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+    }
+    .sub {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 20px;
+      margin: 0 0 14px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #d0d7de;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .chip {
+      border: 1px solid #d0d7de;
+      background: #fff;
+      padding: 9px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+      user-select: none;
+    }
+    .chip.active {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .primary { background: #111; color: white; }
+    .secondary { background: #e9ecef; color: #111; }
+    .success { background: #1f8f4e; color: white; }
+    .result {
+      background: #f8f9fa;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 180px;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    .small {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+    }
+    .footer-note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Promo Hunter Sofia</h1>
+      <div class="sub">
+        Намери най-изгодните оферти в София по продукт, категория, магазини и списък за пазаруване.
+        Използвай приложението, за да генерираш умна заявка и да търсиш по-бързо в брошури и сайтове на магазини.
+      </div>
+    </div>
 
-<div class="container">
+    <div class="grid">
+      <div>
+        <div class="card">
+          <h2 class="section-title">1) Какво търсиш</h2>
 
-<h1>Promo Hunter Sofia</h1>
+          <label for="product">Конкретен продукт</label>
+          <input id="product" placeholder="Например: кафе Lavazza 250 г, масло President, винтоверт Bosch" />
 
-<p>Намери най-добрите оферти в София</p>
+          <label for="category">Категория</label>
+          <select id="category">
+            <option value="">Избери категория</option>
+            <option>Храни и напитки</option>
+            <option>Млечни продукти</option>
+            <option>Месо и риба</option>
+            <option>Плодове и зеленчуци</option>
+            <option>Препарати и битова химия</option>
+            <option>Козметика и дрогерия</option>
+            <option>Малки електроуреди</option>
+            <option>Голяма техника</option>
+            <option>Инструменти</option>
+            <option>Дом и ремонт</option>
+            <option>Мебели и обзавеждане</option>
+            <option>Градина</option>
+          </select>
 
-<input id="product" placeholder="Например: кафе Lavazza">
+          <label for="shoppingList">Списък за пазаруване (по един продукт на ред)</label>
+          <textarea id="shoppingList" placeholder="яйца&#10;кашкавал&#10;кафе&#10;прах за пране&#10;крушки"></textarea>
+        </div>
 
-<button onclick="search()">Търси най-евтиното</button>
+        <div class="card">
+          <h2 class="section-title">2) Избери магазини</h2>
 
-<div class="result" id="result"></div>
+          <label>Супермаркети и хипермаркети</label>
+          <div class="chips" id="foodStores"></div>
 
-</div>
+          <label>Техника</label>
+          <div class="chips" id="techStores"></div>
 
-<script>
+          <label>Дом, ремонт и градина</label>
+          <div class="chips" id="homeStores"></div>
 
-function search(){
+          <label>Козметика и дрогерия</label>
+          <div class="chips" id="beautyStores"></div>
 
-let product=document.getElementById("product").value
+          <div class="btn-row">
+            <button class="secondary" onclick="selectAllStores()">Избери всички</button>
+            <button class="secondary" onclick="clearStores()">Изчисти магазините</button>
+          </div>
+        </div>
+      </div>
 
-let text=`Провери в Broshura.bg и сайтовете на Lidl, Kaufland, Billa, Fantastico, Technopolis и Bauhaus.
+      <div>
+        <div class="card">
+          <h2 class="section-title">3) Генерирай търсене</h2>
 
-Намери най-евтината цена за: ${product} в София.
+          <div class="btn-row" style="margin-bottom:12px;">
+            <button class="primary" onclick="generatePrompt()">Генерирай заявка</button>
+            <button class="secondary" onclick="copyPrompt()">Копирай</button>
+          </div>
 
-Покажи магазин, цена и валидност.`
+          <div class="btn-row" style="margin-bottom:12px;">
+            <button class="success" onclick="searchBroshura()">Търси в Broshura.bg</button>
+            <button class="secondary" onclick="searchGoogle()">Търси в Google</button>
+          </div>
 
-document.getElementById("result").innerText=text
+          <div id="result" class="result">Тук ще се появи готовата заявка за търсене.</div>
 
-}
+          <div class="footer-note">
+            Съвет: за конкретен артикул използвай поле „Конкретен продукт“. За по-широко търсене използвай категория и списък за пазаруване.
+          </div>
+        </div>
 
-</script>
+        <div class="card">
+          <h2 class="section-title">4) Бързи команди</h2>
+          <div class="btn-row">
+            <button class="secondary" onclick="quickFill('кафе Lavazza 250 г')">Кафе Lavazza</button>
+            <button class="secondary" onclick="quickFill('яйца размер L')">Яйца</button>
+            <button class="secondary" onclick="quickFill('масло President 200 г')">Масло</button>
+            <button class="secondary" onclick="quickFill('кашкавал')">Кашкавал</button>
+            <button class="secondary" onclick="quickFill('прах за пране Ariel')">Прах за пране</button>
+            <button class="secondary" onclick="quickFill('винтоверт Bosch')">Винтоверт Bosch</button>
+          </div>
+          <div class="small">
+            Натисни бутон, после „Генерирай заявка“.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    const storeGroups = {
+      foodStores: [
+        "Lidl", "Kaufland", "Billa", "Fantastico", "T-Market", "Metro", "Hit", "ProMarket", "CBA"
+      ],
+      techStores: [
+        "Technopolis", "Technomarket", "Zora", "eMAG"
+      ],
+      homeStores: [
+        "Mr. Bricolage", "Bauhaus", "Praktiker", "HomeMax", "JYSK", "IKEA", "Aiko XXXLutz", "Mömax"
+      ],
+      beautyStores: [
+        "dm", "Lilly", "Subra"
+      ]
+    };
+
+    const selectedStores = new Set([
+      "Lidl", "Kaufland", "Billa", "Fantastico", "Technopolis", "Technomarket", "Mr. Bricolage", "Bauhaus", "dm"
+    ]);
+
+    function renderStores() {
+      Object.keys(storeGroups).forEach(groupId => {
+        const container = document.getElementById(groupId);
+        container.innerHTML = "";
+        storeGroups[groupId].forEach(store => {
+          const chip = document.createElement("div");
+          chip.className = "chip" + (selectedStores.has(store) ? " active" : "");
+          chip.innerText = store;
+          chip.onclick = () => toggleStore(store);
+          container.appendChild(chip);
+        });
+      });
+    }
+
+    function toggleStore(store) {
+      if (selectedStores.has(store)) {
+        selectedStores.delete(store);
+      } else {
+        selectedStores.add(store);
+      }
+      renderStores();
+    }
+
+    function selectAllStores() {
+      Object.values(storeGroups).flat().forEach(store => selectedStores.add(store));
+      renderStores();
+    }
+
+    function clearStores() {
+      selectedStores.clear();
+      renderStores();
+    }
+
+    function quickFill(value) {
+      document.getElementById("product").value = value;
+    }
+
+    function buildPrompt() {
+      const product = document.getElementById("product").value.trim();
+      const category = document.getElementById("category").value.trim();
+      const shoppingList = document.getElementById("shoppingList").value.trim();
+      const stores = Array.from(selectedStores);
+
+      return `Ти си AI асистент за сравнение на оферти и цени в София.
+
+Използвай първо Broshura.bg и след това официалните сайтове на магазините, ако е нужно.
+
+Магазини за следене:
+${stores.length ? stores.join(", ") : "Не са избрани магазини"}
+
+Конкретен продукт:
+${product || "няма"}
+
+Категория:
+${category || "няма"}
+
+Списък за пазаруване:
+${shoppingList || "няма"}
+
+Задача:
+1. Намери най-добрите текущи оферти.
+2. Посочи магазин, промо цена, стара цена и валидност.
+3. Ако има различни грамажи или разфасовки, сравни по цена за кг / литър / брой.
+4. Ако офертата е с карта за лоялност, купон или bundle, отбележи го.
+5. Накрая кажи от кои 1-3 магазина е най-изгодно да се пазарува днес.
+
+Формат:
+| Продукт | Магазин | Промо цена | Стара цена | Единична цена | Валидност | Източник | Бележка |
+
+След таблицата дай:
+- Най-добра оферта
+- 3 алтернативи
+- Кратко заключение`;
+    }
+
+    function generatePrompt() {
+      document.getElementById("result").innerText = buildPrompt();
+    }
+
+    function copyPrompt() {
+      const text = buildPrompt();
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById("result").innerText = text + "\\n\\n✅ Заявката е копирана.";
+      });
+    }
+
+    function searchBroshura() {
+      const product = document.getElementById("product").value.trim();
+      const category = document.getElementById("category").value.trim();
+      const query = product || category || "промоции";
+      window.open(`https://www.google.com/search?q=site%3Abroshura.bg+${encodeURIComponent(query)}`, "_blank");
+    }
+
+    function searchGoogle() {
+      const product = document.getElementById("product").value.trim();
+      const category = document.getElementById("category").value.trim();
+      const shoppingList = document.getElementById("shoppingList").value.trim().replace(/\n/g, " ");
+      const stores = Array.from(selectedStores).join(" ");
+      const query = [product, category, shoppingList, stores, "София оферта промоция"].filter(Boolean).join(" ");
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
+    }
+
+    renderStores();
+  </script>
 </body>
 </html>
